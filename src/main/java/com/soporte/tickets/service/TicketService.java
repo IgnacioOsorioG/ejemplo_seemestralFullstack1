@@ -40,13 +40,18 @@ public class TicketService {
     }
 
     public String borrarTicket(int id) {
-        for (Ticket tick : tickets) {
-            if (tick.getId() == id) {
-                tickets.remove(tick);
-                return "ticket removido con exito";
+        try {
+            for (Ticket tick : tickets) {
+                if (tick.getId() == id) {
+                    ticketRepository.delete(ticketRepository.findById(id));
+                    tickets.remove(tick);
+                    return "ticket removido con exito";
+                }
             }
+            return null;
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
         }
-        return null;
     }
 
     public String hacerTicket(Ticket tick) {
@@ -58,6 +63,8 @@ public class TicketService {
                 nuevoTicket.setTitulo(tick.getTitulo());
                 nuevoTicket.setDescripcion(tick.getDescripcion());
                 ticketRepository.save(nuevoTicket);
+                
+                tickets.add(new Ticket(nuevoTicket.getId(),tick.getTitulo(),tick.getDescripcion()));
                 return "Ticket creado con exito, muchas gracias";
             }
             return "Id ocupada";

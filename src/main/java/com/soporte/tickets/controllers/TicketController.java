@@ -39,7 +39,7 @@ public class TicketController {
     @Operation(summary="muestra todos los tickets")
     @GetMapping("/tickets")
     public List<Ticket> mostrarTickets() {
-        return accionTicket.obtenerTickets();
+        return ticketservice.obtenerTickets();
     }
 
     @Operation(summary="Mostrar un ticket especifico usando la id")
@@ -51,9 +51,10 @@ public class TicketController {
     @Operation(summary="Borrar un ticket especifico usando su id")
     @DeleteMapping("/tickets/{id}")
     public String borrarTicket(@PathVariable int id) {
-        return accionTicket.borrarTicket(id);
+        return ticketservice.borrarTicket(id);
     }
     
+    @Operation(summary="Crear un ticket")
     @PostMapping("/tickets")
     public ResponseEntity<String> crearTicket(@RequestBody Ticket ticket){
         return ResponseEntity.ok(ticketservice.hacerTicket(ticket));
