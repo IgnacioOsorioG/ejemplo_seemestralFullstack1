@@ -2,6 +2,10 @@ package com.soporte.tickets.service;
 
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.Optional;
+>>>>>>> 10b6ce9 (se agrego el put y pruebas)
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
@@ -11,6 +15,11 @@ import com.soporte.tickets.models.Ticket;
 import com.soporte.tickets.models.entity.TicketEntity;
 import com.soporte.tickets.repository.TicketRepository;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 10b6ce9 (se agrego el put y pruebas)
 @Service
 public class TicketService {
 
@@ -41,6 +50,7 @@ public class TicketService {
 
     public String borrarTicket(int id) {
         try {
+<<<<<<< HEAD
             for (Ticket tick : tickets) {
                 if (tick.getId() == id) {
                     ticketRepository.delete(ticketRepository.findById(id));
@@ -49,6 +59,13 @@ public class TicketService {
                 }
             }
             return null;
+=======
+            if (ticketRepository.existsById(id)){
+                ticketRepository.deleteById(id);
+                return "Ticket Borrado con exito";
+            }
+            return "Ticket no encontrado";
+>>>>>>> 10b6ce9 (se agrego el put y pruebas)
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
@@ -75,4 +92,23 @@ public class TicketService {
             return "Error: " + e.getMessage();
         }
     }
+<<<<<<< HEAD
+=======
+    
+    public String actualizarTicket(int id, Ticket tick){
+        try {
+            Optional<TicketEntity> ticketOptional = ticketRepository.findById(id); 
+            if (ticketOptional.isPresent()){
+                TicketEntity ticket = ticketOptional.get();
+                ticket.setId(tick.getId());
+                ticket.setTitulo(tick.getTitulo());
+                ticket.setDescripcion(tick.getDescripcion());
+                return  "Ticket actualizado con exito";
+            }
+                return "Ticket no encontrado";
+        } catch ( Exception e) {
+            return "Error al actualizar el ticket: " + e.getMessage();
+        }
+    }
+>>>>>>> 10b6ce9 (se agrego el put y pruebas)
 }

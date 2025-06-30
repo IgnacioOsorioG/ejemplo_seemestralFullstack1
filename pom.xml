@@ -44,6 +44,11 @@
             <type>pom</type>
         </dependency>
 
+<<<<<<< HEAD
+=======
+        
+
+>>>>>>> 10b6ce9 (se agrego el put y pruebas)
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -54,6 +59,27 @@
         </dependency>
 
         <dependency>
+<<<<<<< HEAD
+=======
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+>>>>>>> 10b6ce9 (se agrego el put y pruebas)
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
