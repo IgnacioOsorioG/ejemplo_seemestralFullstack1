@@ -93,7 +93,7 @@ public class TicketsTest {
         assertEquals("Ticket no encontrado", resultado);
     }
 
-    /* 
+     
     @Test
     public void testActualizarTicket_existe(){
         when(ticketRepository.findById(1)).thenReturn(Optional.of(ticketEntity));
@@ -113,5 +113,5 @@ public class TicketsTest {
         String resultado = ticketService.actualizarTicket(3, tick);
         assertEquals("Ticket no encontrado", resultado);
     }
-    */
+    
 }
