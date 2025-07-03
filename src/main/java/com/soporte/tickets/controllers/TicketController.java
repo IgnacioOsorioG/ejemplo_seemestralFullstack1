@@ -1,10 +1,6 @@
 package com.soporte.tickets.controllers;
 
-<<<<<<< HEAD
-public class TicketController {
 
-}
-=======
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +17,8 @@ import com.soporte.tickets.repository.TicketRepository;
 import com.soporte.tickets.service.TicketService;
 
 import io.swagger.v3.oas.annotations.Operation;
-<<<<<<< HEAD
-=======
 import org.springframework.web.bind.annotation.PutMapping;
 
->>>>>>> 10b6ce9 (se agrego el put y pruebas)
 
 
 @RestController
@@ -67,11 +60,6 @@ public class TicketController {
     @Operation(summary="Crear un ticket")
     @PostMapping("/tickets")
     public ResponseEntity<String> crearTicket(@RequestBody Ticket ticket){
-<<<<<<< HEAD
-        return ResponseEntity.ok(ticketservice.hacerTicket(ticket));
-    }
-    
-=======
         return ResponseEntity.status(201).body(ticketservice.hacerTicket(ticket));
     }
     
@@ -79,13 +67,10 @@ public class TicketController {
     @PutMapping("tickets/{id}")
     public ResponseEntity<String> actualizarTicket(@PathVariable int id, @RequestBody Ticket ticket){
         return ResponseEntity.status(201).body(ticketservice.actualizarTicket(id, ticket));
-
     }
         
         
     
->>>>>>> 10b6ce9 (se agrego el put y pruebas)
 }  
     
 
->>>>>>> master

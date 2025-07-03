@@ -2,45 +2,14 @@ package com.soporte.tickets.service;
 
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.soporte.tickets.models.Ticket;
 
-@Service
-public class TicketService {
-
-@Autowired
-
-private final List<Ticket> tickets = new ArrayList<>();
-
-
-public TicketService(){
-    tickets.add(new Ticket());
-}
-
-public Ticket traerTicket(int id){
-    try{
-        TicketEntity ticket = ticketRepository.findById(id);
-        if(ticket!=null){
-            Ticket ticketNuevo = new Ticket(ticket.getId(), ticket.getTitulo(), ticket.getDescripcion());
-            return ticketNuevo;
-        }
-        return null;
-    }
-    catch(Exception e){
-        return null;
-    }
-}
-
-
-=======
-<<<<<<< HEAD
-=======
 import java.util.Optional;
->>>>>>> 10b6ce9 (se agrego el put y pruebas)
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
@@ -50,11 +19,8 @@ import com.soporte.tickets.models.Ticket;
 import com.soporte.tickets.models.entity.TicketEntity;
 import com.soporte.tickets.repository.TicketRepository;
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 10b6ce9 (se agrego el put y pruebas)
 @Service
 public class TicketService {
 
@@ -85,22 +51,11 @@ public class TicketService {
 
     public String borrarTicket(int id) {
         try {
-<<<<<<< HEAD
-            for (Ticket tick : tickets) {
-                if (tick.getId() == id) {
-                    ticketRepository.delete(ticketRepository.findById(id));
-                    tickets.remove(tick);
-                    return "ticket removido con exito";
-                }
-            }
-            return null;
-=======
             if (ticketRepository.existsById(id)){
                 ticketRepository.deleteById(id);
                 return "Ticket Borrado con exito";
             }
             return "Ticket no encontrado";
->>>>>>> 10b6ce9 (se agrego el put y pruebas)
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
@@ -127,8 +82,6 @@ public class TicketService {
             return "Error: " + e.getMessage();
         }
     }
-<<<<<<< HEAD
-=======
     
     public String actualizarTicket(int id, Ticket tick){
         try {
@@ -145,6 +98,5 @@ public class TicketService {
             return "Error al actualizar el ticket: " + e.getMessage();
         }
     }
->>>>>>> 10b6ce9 (se agrego el put y pruebas)
->>>>>>> master
+
 }
