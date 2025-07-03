@@ -23,7 +23,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             mkdir -p /home/ubuntu/fs1003
-            chmod 755 /home/ubuntu/fs1003 
+            chmod 755 /home/ubuntu/fs1003  # Ensure proper permissions
 
       - name: Sync files with server
         uses: burnett01/rsync-deployments@7.0.2
