@@ -1,0 +1,48 @@
+name: maquinaJava
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  
+
+      - name: Create directory on server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.IP_SERVER }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            mkdir -p /home/ubuntu/fs1003
+            chmod 755 /home/ubuntu/fs1003  # Ensure proper permissions
+
+      - name: Sync files with server
+        uses: burnett01/rsync-deployments@7.0.2
+        with:
+          switches: "-avzh --delete --exclude=.git/"  
+          path: "./"
+          remote_host: ${{ secrets.IP_SERVER }}
+          remote_user: ${{ secrets.USERNAME }}
+          remote_path: "/home/ubuntu/fs1003/"
+          remote_key: ${{ secrets.PRIVATE_KEY }}
+          remote_port: ${{ secrets.PORT }}
+
+      - name: Deploy Docker containers
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.IP_SERVER }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /home/ubuntu/fs1003
+            # Graceful shutdown and rebuild
+            sudo docker compose down --remove-orphans --timeout 120
+            sudo docker compose up -d --build --force-recreate
+            # Clean unused resources
+            sudo docker system prune -f
